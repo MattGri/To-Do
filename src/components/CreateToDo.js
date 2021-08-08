@@ -2,12 +2,20 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { addToDo } from "../redux/actions/toDoActions";
 import { useState } from "react";
+import ToDoList from "./ToDoList";
 
 const FormParent = styled.form`
   background-color: #141623;
   width: 490px;
   margin: 0 auto;
-  height: 90vh;
+  height: auto;
+  padding-bottom: 30px;
+
+  @media(max-width: 500px){
+   
+    width: 90%;
+    margin-bottom: 30px;
+  }
 `;
 
 const Title = styled.h1`
@@ -30,6 +38,7 @@ const Description = styled.input`
   :focus {
     outline: none;
   }
+
 `;
 
 const AddToDo = styled.button`
@@ -44,18 +53,36 @@ const DivParent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 30px;
 `;
 
-const CreateToDo = () => {
+const CreateToDo = ({ addToDoStore }) => {
+  const [description, setDescription] = useState("");
+
+  const addNewToDo = (e) => {
+    e.preventDefault();
+
+    const toDo = {
+      description: description,
+    };
+
+    addToDoStore(toDo);
+  };
+
   return (
     <FormParent>
       <Title>What's the Plan for Today?</Title>
       <DivParent>
-        <Description type="text" placeholder="Add a todo" />
-        <AddToDo>Add Todo</AddToDo>
+        <Description type="text" placeholder="Add a todo" value={description} onChange={e => setDescription(e.target.value)}/>
+        <AddToDo onClick={addNewToDo}>Add Todo</AddToDo>
       </DivParent>
+      <ToDoList />
     </FormParent>
   );
 };
 
-export default CreateToDo;
+const dispatchToProps = (dispatch) => ({
+  addToDoStore: (toDo) => dispatch(addToDo(toDo))
+});
+
+export default connect(null, dispatchToProps)(CreateToDo);
