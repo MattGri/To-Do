@@ -62,13 +62,22 @@ const CreateToDo = ({ addToDoStore }) => {
   const addNewToDo = (e) => {
     e.preventDefault();
 
+     if(description === ''){
+      return alert('You need to write something :)');
+     }
+  
     const toDo = {
       description: description,
     };
 
     addToDoStore(toDo);
+
+    setDescription('');
   };
 
+
+
+ 
   return (
     <FormParent>
       <Title>What's the Plan for Today?</Title>
