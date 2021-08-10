@@ -30,3 +30,5 @@ I created a to do app in which you can add tasks and delete them.
  
  If you have any issues, please let me know on mateusz.grzybowski98@gmail.com
 
+ # Live 📍
+ https://61122f9d801cb91c955cece1--elastic-neumann-ffec4a.netlify.app/
