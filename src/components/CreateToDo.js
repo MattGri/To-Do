@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { addToDo } from "../redux/actions/toDoActions";
-import { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ToDoList from "./ToDoList";
 
 const FormParent = styled.form`
@@ -59,6 +59,12 @@ const DivParent = styled.div`
 const CreateToDo = ({ addToDoStore }) => {
   const [description, setDescription] = useState("");
 
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [description])
+  
   const addNewToDo = (e) => {
     e.preventDefault();
 
@@ -82,10 +88,11 @@ const CreateToDo = ({ addToDoStore }) => {
     <FormParent>
       <Title>What's the Plan for Today?</Title>
       <DivParent>
-        <Description type="text" placeholder="Add a todo" value={description} onChange={e => setDescription(e.target.value)}/>
+        <Description type="text" placeholder="Add a todo" value={description} onChange={e => setDescription(e.target.value)} ref={inputRef}/>
         <AddToDo onClick={addNewToDo}>Add Todo</AddToDo>
       </DivParent>
       <ToDoList />
+       
     </FormParent>
   );
 };
