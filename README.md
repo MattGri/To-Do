@@ -16,7 +16,7 @@ I created a to do app in which you can add tasks and delete them.
 
 1. Open your terminal and then type 
 
-     **$ git clone {then url to the GitHub repo}**
+     **$ git clone https://github.com/MattGri/To-Do-App**
 
 2. **cd** into the new folder and type
 
