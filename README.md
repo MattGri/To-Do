@@ -4,6 +4,7 @@ I created a to do app in which you can add tasks and delete them.
 # Technologies 🔧
 
 * React (styled components)
+* Redux (Toolkit)
 
 # Screenshots 📺
 ![image](https://user-images.githubusercontent.com/61913031/128687303-41ab594b-4a6d-4cbf-9928-d31d8eeb6729.png)
