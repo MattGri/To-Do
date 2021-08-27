@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { connect } from "react-redux";
-import { deleteTodo } from "../redux/actions/toDoActions";
+import { useSelector, useDispatch } from 'react-redux';
+import { todosList, deleteTodo } from '../redux/todo/todoSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const DivParent = styled.div`
@@ -24,27 +24,22 @@ const DeleteIcon = styled(FontAwesomeIcon)`
     margin-right: 20px;
 `
 
-const ToDoList = ({ toDo, deleteToDoFromStore }) => {
+const ToDoList = () => {
 
+    const todos = useSelector(todosList)
     
+    const dispatch = useDispatch();
 
-    const deleteToDo = toDo => {
-        deleteToDoFromStore(toDo);
+    const deleteToDos = (todo) => {
+        dispatch(deleteTodo(todo))
     }
+ 
     return(
     <>
-        {toDo.map(toDo => <DivParent> <Text>{toDo.description}  </Text> <DeleteIcon icon='times-circle' onClick={() => deleteToDo(toDo)}/> </DivParent>)}  
+        {todos.map(toDo => <DivParent> <Text>{toDo.description}  </Text> <DeleteIcon icon='times-circle' onClick={() => deleteToDos(toDo)}/> </DivParent>)}  
     </>  
     )
 }
 
-const mapStateToProps = store => ({
-    toDo: store.toDo
-})
 
-const mapDispatchToProps = dispatch => ({
-    deleteToDoFromStore: toDo => dispatch(deleteTodo(toDo))
-})
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(ToDoList);
+export default ToDoList;

@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { connect } from "react-redux";
-import { addToDo } from "../redux/actions/toDoActions";
 import React, { useState, useEffect, useRef } from "react";
 import ToDoList from "./ToDoList";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../redux/todo/todoSlice";
 
 const FormParent = styled.form`
   background-color: #141623;
@@ -56,8 +56,10 @@ const DivParent = styled.div`
   margin-bottom: 30px;
 `;
 
-const CreateToDo = ({ addToDoStore }) => {
+const CreateToDo = () => {
   const [description, setDescription] = useState("");
+
+  const dispatch = useDispatch();
 
   const inputRef = useRef(null);
 
@@ -73,10 +75,11 @@ const CreateToDo = ({ addToDoStore }) => {
      }
   
     const toDo = {
+      id: Math.floor(Math.random() * 9999),
       description: description,
     };
 
-    addToDoStore(toDo);
+    dispatch(addTodo(toDo));
 
     setDescription('');
   };
@@ -97,8 +100,5 @@ const CreateToDo = ({ addToDoStore }) => {
   );
 };
 
-const dispatchToProps = (dispatch) => ({
-  addToDoStore: (toDo) => dispatch(addToDo(toDo))
-});
 
-export default connect(null, dispatchToProps)(CreateToDo);
+export default CreateToDo;
