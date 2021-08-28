@@ -1,5 +1,5 @@
 # Project Overview  🎉
-I created a to do app in which you can add tasks and delete them.
+I created a to-do app in which you can add tasks and delete them.
 
 # Technologies 🔧
 
